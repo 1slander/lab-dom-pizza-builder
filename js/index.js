@@ -66,21 +66,41 @@ function renderGreenPeppers() {
 
 function renderWhiteSauce() {
   // Iteration 2: add/remove the class "sauce-white" of `<section class="sauce">`
-  document.querySelectorAll('.sauce').forEach((sauce) => {
-    if (!state.whiteSauce) {
-      sauce.style.visibility = 'hidden';
-    } else {
-      sauce.style.visibility = 'visible';
-    }
-  });
+  const sauce = document.querySelector('.sauce');
+  if (state.whiteSauce) {
+    sauce.classList.add('sauce-white');
+    //sauce.style.visibility = 'visible';
+  } else {
+    sauce.classList.remove('sauce-white');
+    // sauce.style.visibility = 'visible';
+  }
 }
 
 function renderGlutenFreeCrust() {
   // Iteration 2: add/remove the class "crust-gluten-free" of `<section class="crust">`
+  const crust = document.querySelector('.crust');
+  if (state.glutenFreeCrust) {
+    crust.classList.add('crust-gluten-free');
+    //crust.style.visibility = 'visible';
+  } else {
+    crust.classList.remove('crust-gluten-free');
+    //crust.style.visibility = 'visible';
+  }
 }
 
 function renderButtons() {
   // Iteration 3: add/remove the class "active" of each `<button class="btn">`
+
+  const pepBtn = document.querySelector('.btn-pepperoni');
+  const mushBtn = document.querySelector('.btn-mushrooms');
+  const greenPeppersBtn = document.querySelector('.btn-green-peppers');
+  const sauceBtn = document.querySelector('.btn-sauce');
+  const crustBtn = document.querySelector('.btn-crust');
+  pepBtn.classList.toggle('active', state.pepperoni);
+  mushBtn.classList.toggle('active', state.mushrooms);
+  greenPeppersBtn.classList.toggle('active', state.greenPeppers);
+  sauceBtn.classList.toggle('active', state.whiteSauce);
+  crustBtn.classList.toggle('active', state.glutenFreeCrust);
 }
 
 function renderPrice() {
@@ -117,3 +137,7 @@ document.querySelector('.btn.btn-sauce').addEventListener('click', function () {
   renderEverything();
 });
 // Iteration 2: Add click event listener on `<button class="btn btn-crust">`
+document.querySelector('.btn.btn-crust').addEventListener('click', function () {
+  state.glutenFreeCrust = !state.glutenFreeCrust;
+  renderEverything();
+});
